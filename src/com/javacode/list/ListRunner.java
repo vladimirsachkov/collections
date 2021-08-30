@@ -76,6 +76,7 @@ public class ListRunner {
                 "3 to update an existing item\n" +
                 "4 to remove an item form the list\n" +
                 "5 to get task priority or number in the list\n" +
+                "6 to add a new item at specific position\n" +
                 "press 0 for exist\n\n" +
                 "AFTER CHOOSING AN OPTION PLEASE PRESS ENTER");
     }
