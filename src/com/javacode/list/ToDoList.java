@@ -1,11 +1,12 @@
 package com.javacode.list;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ToDoList {
 
-    private List<String> toDoList = new ArrayList<>();
+    private LinkedList<String> toDoList = new LinkedList<>();
 
     public void addToList (String task) {
         toDoList.add(task);
