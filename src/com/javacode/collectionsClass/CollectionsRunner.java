@@ -57,8 +57,6 @@ public class CollectionsRunner {
                 return +1;
             } else if (faces.indexOf(this.face)==faces.indexOf(card.getFace())) {
                 return String.valueOf(suit).compareTo(String.valueOf(card.getSuit()));
-            } else {
-                return 0;
             }
 
             return 0;
