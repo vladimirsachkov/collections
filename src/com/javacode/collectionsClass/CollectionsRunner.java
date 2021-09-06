@@ -7,38 +7,45 @@ public class CollectionsRunner {
     public static void main(String[] args) {
         List<Card> deckOfCards = new ArrayList<>();
         for (Card.Face face: Card.Face.values()) {
-            for (Card.Suit suit : Card.Suit.values()) {
+            for (Card.Suit suit: Card.Suit.values()) {
                 deckOfCards.add(new Card(suit, face));
             }
         }
 
-//        System.out.println("Original deck of cards");
-//        for (int i=0; i<deckOfCards.size(); i++) {
-//            System.out.printf("%-20s %s", deckOfCards.get(i), (i+1)%4==0 ? "\n":" ");
-//        }
         Collections.shuffle(deckOfCards);
+        Collections.sort(deckOfCards);
+        Card card = new Card(Card.Suit.SPADES, Card.Face.Queen);
 
-        System.out.println("\n\nCards after shuffle");
-        for (int i=0; i<deckOfCards.size(); i++) {
-            System.out.printf("%-20s %s", deckOfCards.get(i), (i+1)%4==0 ? "\n":" ");
+        int i = Collections.binarySearch(deckOfCards, card);
+        if(i>=0) {
+            System.out.println("Card was found at position " + i);
+        } else {
+            System.out.println("Card was not found");
         }
 
-        Collections.sort(deckOfCards, new CardComparator());
-        System.out.println("Card after sorting");
-        for (int i=0; i<deckOfCards.size(); i++) {
-            System.out.printf("%-20s %s", deckOfCards.get(i), (i+1)%4==0 ? "\n":" ");
+
+        List<Card> cardList = new ArrayList<>(deckOfCards);
+        Collections.fill(cardList,card);
+        Collections.addAll(cardList, card, card, card);
+        Collections.copy(cardList, deckOfCards);
+        int frequency = Collections.frequency(cardList, card);
+        System.out.println("Frequency of " + card + "is" + frequency);
+
+        System.out.println("MIN :"+Collections.min(cardList));
+        System.out.println("MAX :"+Collections.max(cardList));
+//       printOutput(cardList);
+
+//      System.out.println("\n\nCards after shuffle");
+//       printOutput(deckOfCards);
+
+//       System.out.println("Card after sorting");
+ //       printOutput(deckOfCards);
+    }
+
+    private static void printOutput(List<Card> deckOfCards) {
+        for (int i = 0; i < deckOfCards.size(); i++) {
+            System.out.printf("%-20s %s", deckOfCards.get(i), (i + 1) % 4 == 0 ? "\n" : " ");
         }
-//        List<String> colors = new ArrayList<>();
-//
-//        colors.add("yellow");
-//        colors.add("blue");
-//        colors.add("green");
-//        colors.add("black");
-//        colors.add("red");
-//
-//        System.out.println("List before sorting "+colors);
-//        Collections.sort(colors);
-//        System.out.println("List after sorting "+colors);
     }
 
     public static class Card implements  Comparable<Card> {
@@ -82,6 +89,19 @@ public class CollectionsRunner {
         }
 
         @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Card card = (Card) o;
+            return suit == card.suit && face == card.face;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(suit, face);
+        }
+
+        @Override
         public String toString() {
             return face +" of " +suit;
         }
@@ -97,7 +117,7 @@ public class CollectionsRunner {
             } else if (faces.indexOf(card1.getFace()) > faces.indexOf(card2.getFace())) {
                 return -1;
             } else if (faces.indexOf(card1.getFace()) == faces.indexOf(card2.getFace())) {
-                return 0;
+                return String.valueOf(card1.getSuit()).compareTo(String.valueOf(card2.getSuit()));
             }
             return 0;
         }
