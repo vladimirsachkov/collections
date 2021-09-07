@@ -1,11 +1,37 @@
 package com.javacode.StackQueue;
 
+import com.javacode.collectionsClass.Card;
+import com.javacode.collectionsClass.CardComparator;
+
+import java.util.Iterator;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Stack;
 
 public class StackQueueLauncher {
 
     public static void main(String[] args) {
-        passengerProcessing();
+//        passengerProcessing();
+        Queue<Card> cardDeck = new PriorityQueue<>(52, new CardComparator());
+        for (Card.Face face: Card.Face.values()) {
+            for (Card.Suit suit: Card.Suit.values()) {
+                cardDeck.add(new Card(suit, face));
+            }
+        }
+
+        for (int i = 0; i < 10; i++) {
+            System.out.println(cardDeck.poll());
+        }
+        System.out.println("Deck Size is " + cardDeck.size());
+        System.out.println(cardDeck);
+        Iterator<Card> iterator = cardDeck.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+        System.out.println("Deck Size is " + cardDeck.size());
+        System.out.println(cardDeck.peek());
+        cardDeck.clear();
+        System.out.println("Deck Size is " + cardDeck.size());
     }
 
     private static void passengerProcessing() {
