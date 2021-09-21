@@ -24,6 +24,11 @@ public class SetRunner {
         Set<Car> uniqueCars = new HashSet<>(sixCars);
         uniqueCars.addAll(europaCars);
         print(uniqueCars);
+//
+        sixCars.retainAll(europaCars);
+        uniqueCars.retainAll(sixCars);
+        print(uniqueCars);
+
     }
 
     private static void  print(Set<Car> cars) {

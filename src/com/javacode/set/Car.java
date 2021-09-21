@@ -37,7 +37,7 @@ public class Car {
         if (!this.carBrand.equals(car.getCarBrand())) {
             return false;
         }
-        if (!this.carBrand.equals(car.getModel())) {
+        if (!this.model.equals(car.getModel())) {
             return false;
         }
         return !this.pricePerDay.equals(car.getPricePerDay());
