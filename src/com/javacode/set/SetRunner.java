@@ -24,10 +24,6 @@ public class SetRunner {
         Set<Car> uniqueCars = new HashSet<>(sixCars);
         uniqueCars.addAll(europaCars);
         print(uniqueCars);
-
-        if (sixCars==europaCars) {
-
-        }
     }
 
     private static void  print(Set<Car> cars) {

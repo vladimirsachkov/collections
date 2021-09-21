@@ -1,5 +1,7 @@
 package com.javacode.set;
 
+import java.util.Objects;
+
 public class Car {
     private final String carBrand;
     private final String model;
@@ -39,5 +41,10 @@ public class Car {
             return false;
         }
         return !this.pricePerDay.equals(car.getPricePerDay());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(carBrand, model, pricePerDay);
     }
 }
