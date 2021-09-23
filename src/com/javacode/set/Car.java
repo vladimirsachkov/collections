@@ -40,11 +40,14 @@ public class Car {
         if (!this.model.equals(car.getModel())) {
             return false;
         }
-        return !this.pricePerDay.equals(car.getPricePerDay());
+        return this.pricePerDay.equals(car.getPricePerDay());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(carBrand, model, pricePerDay);
+        int result = carBrand.hashCode();
+        result = 31 * result + model.hashCode();
+        result = 31 * result + pricePerDay.hashCode();
+        return result;
     }
 }
