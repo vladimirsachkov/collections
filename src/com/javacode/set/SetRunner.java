@@ -20,13 +20,22 @@ public class SetRunner {
         europaCars.add(new Car("VW", "Golf", 45));
         europaCars.add(new Car("VW", "Polo", 35));
 
-        Set<Car> uniqueCars = new HashSet<>(sixCars);
+        NavigableSet<Car> uniqueCars = new TreeSet<>(sixCars);
         uniqueCars.addAll(europaCars);
-//        print(uniqueCars);
 
-        sixCars.retainAll(europaCars);
-        uniqueCars.removeAll(sixCars);
+        SortedSet<Car> cars = uniqueCars.subSet(new Car("Toyota", "Auris", 40), true,new Car("Audi","A3", 60), true);
+
         print(uniqueCars);
+
+        System.out.println("Higher");
+        System.out.println(uniqueCars.higher(new Car("Toyota", "Auris", 40)));
+        System.out.println("Lower");
+        System.out.println(uniqueCars.lower(new Car("Toyota", "Auris", 40)));
+        System.out.println("Celling");
+        System.out.println(uniqueCars.ceiling(new Car("Toyota", "Auris", 43)));
+        System.out.println("floor");
+        System.out.println(uniqueCars.floor(new Car("Toyota", "Auris", 39)));
+
     }
 
     private static void  print(Set<Car> cars) {

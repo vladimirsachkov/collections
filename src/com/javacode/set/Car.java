@@ -2,7 +2,7 @@ package com.javacode.set;
 
 import java.util.Objects;
 
-public class Car {
+public class Car  implements Comparable<Car>{
     private final String carBrand;
     private final String model;
     private final Integer pricePerDay;
@@ -49,5 +49,21 @@ public class Car {
         result = 31 * result + model.hashCode();
         result = 31 * result + pricePerDay.hashCode();
         return result;
+    }
+
+    @Override
+    public int compareTo(Car car) {
+        if(pricePerDay < car.getPricePerDay()) {
+            return -1;
+        }
+        if (pricePerDay > car.getPricePerDay()) {
+            return 1;
+        }
+        return 0;
+    }
+
+    @Override
+    public String toString() {
+        return carBrand + " " + model + " " +pricePerDay;
     }
 }
