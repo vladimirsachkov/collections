@@ -8,11 +8,11 @@ import java.util.Map;
 public class MapLauncher {
 
     public static void main(String[] args) {
-        Map<Car, Integer> numbers = new HashMap<>();
-        numbers.put(new Car("Toyota", "Corolla", 50), 50);
-        numbers.put(new Car("Audi", "A5", 50), 51);
-        numbers.put(new Car("Toyota", "Auris", 50), 52);
+        Map<String, Integer> numbers = new HashMap<>();
+        numbers.put("Toyota", 50);
+        numbers.put("Audi", 51);
+        System.out.println(numbers.put("Toyota", 52));
 
-        System.out.println(numbers.get(new Car("Audi", "A5", 50)));
+//        System.out.println(numbers.get(new Car("Audi", "A5", 50)));
     }
 }
