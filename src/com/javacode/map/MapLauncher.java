@@ -1,5 +1,6 @@
 package com.javacode.map;
 
+import javax.print.attribute.standard.MediaSize;
 import java.util.*;
 
 public class MapLauncher {
@@ -25,14 +26,18 @@ public class MapLauncher {
     }
 
     private static void printSet(NavigableSet<WordWrapper> wordWrappers) {
-
+            for (WordWrapper wordWrapper: wordWrappers) {
+                System.out.println(wordWrapper);
+            }
     }
 
-    private static NavigableSet<WordWrapper> convertToSet (Map<String, Integer> wordMap) {
+    private static Set<WordWrapper> convertToSet (Map<String, Integer> wordMap) {
+        wordMap.remove("1947");
+        wordMap.replace("иванов", 2, 6);
         NavigableSet<WordWrapper> wordSet = new TreeSet<>();
         for (Map.Entry<String, Integer> e : wordMap.entrySet()) {
             wordSet.add(new WordWrapper(e.getKey(), e.getValue()));
         }
-        return wordSet;
+        return new Collections.unmodifiableSet(wordSet);
     }
 }

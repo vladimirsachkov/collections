@@ -1,5 +1,7 @@
 package com.javacode.map;
 
+import java.util.Objects;
+
 public class WordWrapper implements Comparable<WordWrapper> {
     private final String word;
     private final Integer count;
@@ -18,18 +20,31 @@ public class WordWrapper implements Comparable<WordWrapper> {
     }
 
     @Override
-    public int compareTo(WordWrapper word) {
-        if (count < word.getCount()) {
-            return 1;
-        }
-        if (count > word.getCount()) {
+    public int compareTo(WordWrapper thatWord) {
+        if (count < thatWord.getCount()) {
             return -1;
         }
-        return 0;
+        if (count > thatWord.getCount()) {
+            return 1;
+        }
+        return word.compareTo(thatWord.getWord());
     }
 
     @Override
     public String toString() {
         return word + " -> " + count;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WordWrapper that = (WordWrapper) o;
+        return Objects.equals(word, that.word) && Objects.equals(count, that.count);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(word, count);
     }
 }
