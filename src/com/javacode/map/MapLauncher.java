@@ -1,6 +1,5 @@
 package com.javacode.map;
 
-import javax.print.attribute.standard.MediaSize;
 import java.util.*;
 
 public class MapLauncher {
@@ -21,8 +20,9 @@ public class MapLauncher {
             }
         }
 
-        NavigableSet<WordWrapper> wordWrappers = convertToSet(wordMap);
-        printSet(wordWrappers);
+        Set<WordWrapper> wordWrappers = convertToSet(wordMap);
+        wordWrappers.add(new WordWrapper(" ", 234));
+        //        printSet(wordWrappers);
     }
 
     private static void printSet(NavigableSet<WordWrapper> wordWrappers) {
@@ -38,6 +38,6 @@ public class MapLauncher {
         for (Map.Entry<String, Integer> e : wordMap.entrySet()) {
             wordSet.add(new WordWrapper(e.getKey(), e.getValue()));
         }
-        return new Collections.unmodifiableSet(wordSet);
+        return Collections.unmodifiableSet(wordSet);
     }
 }
