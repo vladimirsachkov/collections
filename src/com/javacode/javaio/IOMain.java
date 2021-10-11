@@ -6,8 +6,7 @@ import com.javacode.collections.map.treemap.TreeMapRunner;
 
 import java.io.*;
 import java.nio.Buffer;
-import java.util.NavigableMap;
-import java.util.Set;
+import java.util.*;
 
 public class IOMain {
 
@@ -15,8 +14,34 @@ public class IOMain {
 
     public static void main(String[] args) throws IOException {
         NavigableMap<AverageStudentGrade, Set<SubjectGrade>> grades = TreeMapRunner.createGrades();
-        readFile(grades);
-        readFile();
+//        writeFile(grades);
+//        readFile();
+
+        Formatter formatter = new Formatter("BankAccounts.txt");
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Please enter clientId, clientName, client surname, account balance");
+        int i = 0;
+        while (i<3) {
+            try {
+                formatter.format("%d, %s, %s, %.2f%n", scanner.nextInt(), scanner.next(), scanner.next(), scanner.nextFloat());
+                i++;
+            } catch (InputMismatchException e) {
+                System.out.println("Input is incorrect. Please try again.");
+                scanner.nextLine();
+            }
+        }
+        formatter.close();
+
+//        try(FileInputStream reader = new FileInputStream(FILE_NAME);
+//            FileOutputStream writer = new FileOutputStream("GradeBookByte.txt")) {
+//
+//            int c;
+//            while((c = reader.read()) != -1) {
+//                System.out.print(c);
+//                writer.write(c);
+//            }
+//        }
     }
 
     private static void readFile() throws IOException {
@@ -27,8 +52,8 @@ public class IOMain {
         }
     }
 
-    private static void readFile(NavigableMap<AverageStudentGrade, Set<SubjectGrade>> grades) throws IOException {
-        try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_NAME))) {
+    private static void writeFile(NavigableMap<AverageStudentGrade, Set<SubjectGrade>> grades) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
             for (AverageStudentGrade gradeKey : grades.keySet()) {
                 writer.write("=================================================\n");
                 writer.write("Student: " + gradeKey.getName() + " Average grade: " + gradeKey.getAverageGrade() + "\n");
