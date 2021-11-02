@@ -24,9 +24,8 @@ public class IOMain {
 //        System.out.println(System.getProperty("user.dir"));
 
         FileUtils utils = new FileUtils();
-        utils.printIOFileDetails(FILE_NAME);
-        System.out.println("=========================");
-        utils.printIOFileDetails("./");
+
+        utils.printNioFileDetails(FILE_NAME);
     }
 
     private static void processGrades(SortedMap<AverageStudentGrade, Set<SubjectGrade>> grades, Writer writer, String fileName) {

@@ -4,7 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Path;
+import java.nio.file.*;
 
 public class FileUtils {
 
@@ -39,5 +39,38 @@ public class FileUtils {
 
             Path filePath = file.toPath();
         }
+
+        }
+
+    public void printNioFileDetails(String fileName) throws IOException {
+
+        Path path = Paths.get(fileName);
+        Path path1 = FileSystems.getDefault().getPath(fileName);
+        Path path2 = Paths.get(System.getProperty("user.dir"), fileName);
+
+        System.out.println("File name " + path.getFileName());
+        Path absolutePath = path.toAbsolutePath();
+        System.out.println("Root dir " + absolutePath.getRoot());
+        System.out.println("Absolute path " + absolutePath);
+        System.out.println("Parent dir "+absolutePath.getParent());
+        System.out.println("Name count "+absolutePath.getFileName());
+        System.out.println("Sub-path "+absolutePath.subpath(0, 3));
+        Path path3 = Paths.get("../../");
+        System.out.println("Real paths " + path3.toRealPath());
+
+        System.out.println("File exist " + Files.exists(path));
+        System.out.println("File does not exist " + Files.notExists(path));
+        System.out.println("Is readable " + Files.isReadable(path));
+
+        System.out.println("Is the same file " + Files.isSameFile(path, path1));
+
+        Path parentPath = absolutePath.getParent();
+        Path filesPath = parentPath.resolve("files");
+        if (Files.notExists(filesPath)) {
+            Files.createDirectory(filesPath);
+        }
+        Files.move(absolutePath, filesPath.resolve(path), StandardCopyOption.REPLACE_EXISTING);
+        Files.delete(filesPath.resolve(path));
+        Files.delete(filesPath);
     }
 }
