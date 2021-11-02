@@ -1,7 +1,9 @@
 package com.javacode.javaio;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,5 +38,37 @@ public class Reader {
             e.printStackTrace();
         }
         return students;
+    }
+
+    public void readFileFull(String fileName) throws IOException {
+        Path path = Paths.get(fileName);
+
+        List<String> lines = Files.readAllLines(path);
+        for (String l : lines) {
+            System.out.println(l);
+        }
+    }
+
+    public void nioReadFileWithBuffer(String fileName) throws IOException {
+        Path path = Paths.get(fileName);
+        Charset charset = Charset.forName("UTF-8");
+
+        try (BufferedReader reader = Files.newBufferedReader(path)) {
+            String s;
+            while ((s = reader.readLine()) !=null) {
+                System.out.println(s);
+            }
+        }
+    }
+
+    public void nioReadWithStream(String fileName) throws IOException {
+        Path path = Paths.get(fileName);
+        try(InputStream in = Files.newInputStream(path)) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            String s;
+            while ((s = reader.readLine()) !=null) {
+                System.out.println(s);
+            }
+        }
     }
 }
