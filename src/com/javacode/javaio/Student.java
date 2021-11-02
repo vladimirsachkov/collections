@@ -9,7 +9,7 @@ public class Student implements Serializable {
 
     private String name;
     private float averageGrade;
-    private transient Set<SubjectGrade> grades;
+    private Set<SubjectGrade> grades;
 
     public Student(String name, float averageGrade, Set<SubjectGrade> grades) {
         this.name = name;
@@ -27,5 +27,14 @@ public class Student implements Serializable {
 
     public Set<SubjectGrade> getGrades() {
         return grades;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", averageGrade=" + averageGrade +
+                ", grades=" + grades +
+                '}';
     }
 }

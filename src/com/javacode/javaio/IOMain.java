@@ -5,12 +5,12 @@ import com.javacode.collections.map.treemap.SubjectGrade;
 import com.javacode.collections.map.treemap.TreeMapRunner;
 
 import java.io.*;
-import java.nio.Buffer;
 import java.util.*;
 
 public class IOMain {
 
     private static final String FILE_NAME = "GradeBook.txt";
+    private static final String BINARY_FILE = "Students.bin";
 
     public static void main(String[] args) throws IOException {
         SortedMap<AverageStudentGrade, Set<SubjectGrade>> grades = TreeMapRunner.createGrades();
@@ -19,13 +19,23 @@ public class IOMain {
         writer.writeFile(grades, FILE_NAME);
         reader.readFile(FILE_NAME);
 //        writeWithFormatter();
+        processGrades(grades, writer, BINARY_FILE);
+        outputObjects(reader, BINARY_FILE);
     }
 
-    private void processGardes(SortedMap<AverageStudentGrade, Set<SubjectGrade>> grades, Writer writer, String fileName) {
+    private static void processGrades(SortedMap<AverageStudentGrade, Set<SubjectGrade>> grades, Writer writer, String fileName) {
         List<Student> students = new ArrayList<>();
         for (AverageStudentGrade gradeKey: grades.keySet()) {
             students.add(new Student(gradeKey.getName(), gradeKey.getAverageGrade(), grades.get(gradeKey)));
         }
         writer.writeObject(students, fileName);
+    }
+
+    private static void outputObjects(Reader reader, String fileName) {
+        List<Student> students = reader.readObject(fileName);
+        for (Student student : students) {
+            System.out.printf("%s, %.2f %n", student.getName(), student.getAverageGrade());
+            System.out.println(student.getGrades());
+        }
     }
 }
