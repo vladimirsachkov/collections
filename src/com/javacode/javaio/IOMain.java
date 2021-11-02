@@ -17,10 +17,16 @@ public class IOMain {
         Reader reader = new Reader();
         Writer writer = new Writer();
         writer.writeFile(grades, FILE_NAME);
-        reader.readFile(FILE_NAME);
+//        reader.readFile(FILE_NAME);
 //        writeWithFormatter();
-        processGrades(grades, writer, BINARY_FILE);
-        outputObjects(reader, BINARY_FILE);
+//        processGrades(grades, writer, BINARY_FILE);
+//        outputObjects(reader, BINARY_FILE);
+//        System.out.println(System.getProperty("user.dir"));
+
+        FileUtils utils = new FileUtils();
+        utils.printIOFileDetails(FILE_NAME);
+        System.out.println("=========================");
+        utils.printIOFileDetails("./");
     }
 
     private static void processGrades(SortedMap<AverageStudentGrade, Set<SubjectGrade>> grades, Writer writer, String fileName) {
