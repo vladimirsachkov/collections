@@ -1,12 +1,16 @@
 package com.javacode.javaio;
 
 import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.RandomAccess;
 
 public class Reader {
 
@@ -69,6 +73,22 @@ public class Reader {
             while ((s = reader.readLine()) !=null) {
                 System.out.println(s);
             }
+        }
+    }
+
+    public void nioReadWithChannel (String fileName) throws IOException {
+        RandomAccessFile file = new RandomAccessFile(fileName, "rw");
+        FileChannel channel = file.getChannel();
+
+        ByteBuffer buffer = ByteBuffer.allocate(100);
+        int bytesNumber = channel.read(buffer);
+        while (bytesNumber > 0) {
+            buffer.flip();
+            while (buffer.hasRemaining()) {
+                System.out.println((char) buffer.get());
+            }
+            buffer.clear();
+            bytesNumber = channel.read(buffer);
         }
     }
 }
