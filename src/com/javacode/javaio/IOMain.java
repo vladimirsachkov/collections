@@ -11,7 +11,7 @@ public class IOMain {
 
     private static final String FILE_NAME = "GradeBook.txt";
     private static final String BINARY_FILE = "Students.bin";
-    private static final String BUFFERED_FILE = "Buffered.txt";
+    private static final String BUFFERED_FILE = "Buffered.bin";
 
     public static void main(String[] args) throws IOException {
         SortedMap<AverageStudentGrade, Set<SubjectGrade>> grades = TreeMapRunner.createGrades();
@@ -24,16 +24,16 @@ public class IOMain {
 //        outputObjects(reader, BINARY_FILE);
 //        System.out.println(System.getProperty("user.dir"));
 
-        FileUtils utils = new FileUtils();
+//        FileUtils utils = new FileUtils();
 //        utils.printIOFileDetails("./");
 //        utils.printNioFileDetails(FILE_NAME);
 //        utils.printNioFileDetails(FILE_NAME);
 //        reader.nioReadFileWithBuffer(FILE_NAME);
 //        writer.nipWriteWithBuffer(BUFFERED_FILE);
 //        reader.nioReadWithStream(FILE_NAME);
-//        writer.nioWriteWithStream(BUFFERED_FILE);
-
-        reader.nioReadWithStream(FILE_NAME);
+//       writer.nioWriteWithStream(BUFFERED_FILE);
+        reader.nioReadWithChannel(FILE_NAME);
+//        writer.nioWriteWithChannel(BUFFERED_FILE);
     }
 
     private static void processGrades(SortedMap<AverageStudentGrade, Set<SubjectGrade>> grades, Writer writer, String fileName) {

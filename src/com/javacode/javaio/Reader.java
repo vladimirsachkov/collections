@@ -85,10 +85,11 @@ public class Reader {
         while (bytesNumber > 0) {
             buffer.flip();
             while (buffer.hasRemaining()) {
-                System.out.println((char) buffer.get());
+                System.out.print((char) buffer.get());
             }
             buffer.clear();
             bytesNumber = channel.read(buffer);
         }
+        channel.close();
     }
 }
